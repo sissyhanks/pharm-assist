@@ -14,6 +14,12 @@ const medlistSchema = new Schema(
     },
     dosage:{
         type: String
+    },
+    schedule:{
+      type: String
+    },
+    image: {
+      type: String
     }
   }
 );
