@@ -8,20 +8,25 @@ const UserSchema = new Schema(
       trim: true
     },
     lastName: {
-        type: String,
-        required: true,
-        trim: true
-      },
-      password: {
-        type: String,
-        required: true,
-      },
-      email: {
-        type: String,
-        required: true,
-        unique: true,
-        match: [/.+@.+\..+/, 'Must use a valid email address'],
-      },
+      type: String,
+      required: true,
+      trim: true
+    },
+    username: {
+      type: String, 
+      required: true,
+      trim: true
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      match: [/.+@.+\..+/, 'Must use a valid email address'],
+    },
     medList: [
       {
         type: Schema.Types.ObjectId,
