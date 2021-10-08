@@ -3,19 +3,19 @@ const { Schema, model } = require('mongoose');
 const medlistSchema = new Schema(
   {
     user:
-        [
-            {
-              type: Schema.Types.ObjectId,
-              ref: 'user'
-            }
-          ],
+      [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'user'
+        }
+      ],
     medicine: {
-        type: String
+      type: String
     },
-    dosage:{
-        type: String
+    dosage: {
+      type: String
     },
-    schedule:{
+    schedule: {
       type: String
     },
     image: {
