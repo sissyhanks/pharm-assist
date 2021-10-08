@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import SampleHeader from './components/SampleHeader';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// needed to print pdf
+import ReactToPrint from "react-to-print";
+
+//styling used for Printing
+import "./styles/PrintingStyles.css"
+
+// Main App component
+class ComponentToPrint extends React.Component {
+    render() {
+      return (
+        <div>
+          <SampleHeader />
+        </div>
+      );
+  }
 }
 
-export default App;
+// This button needed to print
+class PButton extends React.Component {
+  render() {
+    return (
+      <div>
+        <ReactToPrint
+          trigger={() => <button>Print this out!</button>}
+          content={() => this.componentRef}
+        />
+        <ComponentToPrint ref={(el) => (this.componentRef = el)} />
+      </div>
+    );
+  }
+}
+
+export default PButton;
