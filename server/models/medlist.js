@@ -2,28 +2,18 @@ const { Schema, model } = require('mongoose');
 
 const medlistSchema = new Schema(
   {
-    user:
-        [
-            {
-              type: Schema.Types.ObjectId,
-              ref: 'user'
-            }
-          ],
     medicine: {
-        type: String
-    },
-    dosage:{
-        type: String
-    },
-    schedule:{
       type: String
     },
-    image: {
+    dosage: {
       type: String
-    }
+    },
+    schedule: {
+      type: String
+    },
   }
 );
 
-const medlist = model('medlist', medlistSchema);
+const medlist = model('medlist', medlistSchema)
 
-module.exports = medlist;
+module.exports = medlistSchema, medlist;
