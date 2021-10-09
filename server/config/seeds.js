@@ -16,7 +16,31 @@ db.once('open', async () => {
         email: randomEmail,
         password: randomPassword,
         medlist: []
-})
+});
+await User.create({
+    firstName: firstName,
+    lastName: lastName,
+    username: randomUsername,
+    email: randomEmail,
+    password: randomPassword,
+    medlist: []
+});
+await User.create({
+    firstName: firstName,
+    lastName: lastName,
+    username: randomUsername,
+    email: randomEmail,
+    password: randomPassword,
+    medlist: []
+});
+await User.create({
+    firstName: firstName,
+    lastName: lastName,
+    username: randomUsername,
+    email: randomEmail,
+    password: randomPassword,
+    medlist: []
+});
 process.exit();
 }
 );
