@@ -29,6 +29,8 @@ const UserSchema = new Schema(
       match: [/.+@.+\..+/, 'Must use a valid email address'],
     },
     medList: [medlistSchema]
+  },{
+  versionKey: false
   }
 );
 

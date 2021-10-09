@@ -1,14 +1,7 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const medlistSchema = new Schema(
   {
-    user:
-      [
-        {
-          type: Schema.Types.ObjectId,
-          ref: 'user'
-        }
-      ],
     medicine: {
       type: String
     },
@@ -18,11 +11,9 @@ const medlistSchema = new Schema(
     schedule: {
       type: String
     },
-    image: {
-      type: String
-    }
   }
 );
 
+const medlist = model('medlist', medlistSchema)
 
-module.exports = medlistSchema;
+module.exports = medlistSchema, medlist;
