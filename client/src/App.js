@@ -2,7 +2,7 @@ import React from 'react';
 import SampleHeader from './components/SampleHeader';
 import Navbar from "./components/Navbar";
 import About from "./components/About";
-import Medlist from "./components/Medlist";
+import MedList from "./components/MedList";
 import Signup from "./components/SignUp";
 
 
@@ -37,15 +37,14 @@ class PButton extends React.Component {
     );
   }
 }
-export default PButton;
+// export default PButton;
 
 export default function App() {
   return (
     <main>
       <Navbar />
       <About />
-      <Medlist />
-      <Skills />
+      <MedList />
       <Signup />
     </main>
   );
