@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema } = require('mongoose');
 
 const medlistSchema = new Schema(
   {
@@ -24,6 +24,5 @@ const medlistSchema = new Schema(
   }
 );
 
-const medlist = model('medlist', medlistSchema);
 
-module.exports = medlist;
+module.exports = medlistSchema;

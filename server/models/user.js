@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const medlistSchema = require('./medlist')
 
 const UserSchema = new Schema(
   {
@@ -27,12 +28,7 @@ const UserSchema = new Schema(
       unique: true,
       match: [/.+@.+\..+/, 'Must use a valid email address'],
     },
-    medList: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'medlist'
-      }
-    ]
+    medList: [medlistSchema]
   }
 );
 
