@@ -1,5 +1,10 @@
 import React from 'react';
 import SampleHeader from './components/SampleHeader';
+import Navbar from "./components/Navbar";
+import About from "./components/About";
+import Medlist from "./components/Medlist";
+import Signup from "./components/SignUp";
+
 
 // needed to print pdf
 import ReactToPrint from "react-to-print";
@@ -32,5 +37,16 @@ class PButton extends React.Component {
     );
   }
 }
-
 export default PButton;
+
+export default function App() {
+  return (
+    <main>
+      <Navbar />
+      <About />
+      <Medlist />
+      <Skills />
+      <Signup />
+    </main>
+  );
+}
