@@ -1,8 +1,8 @@
 const { Schema, model } = require('mongoose');
 
-const medlistSchema = new Schema(
+const medicineSchema = new Schema(
   {
-    medicine: {
+    name: {
       type: String
     },
     dosage: {
@@ -14,6 +14,6 @@ const medlistSchema = new Schema(
   }
 );
 
-const medlist = model('medlist', medlistSchema)
+const medicine = model('medicine', medicineSchema)
 
-module.exports = medlistSchema, medlist;
+module.exports = medicineSchema, medicine;
