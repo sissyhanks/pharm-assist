@@ -1,10 +1,8 @@
 // import user model
+const jwt = require("jsonwebtoken");
 const { User } = require('../models');
-// import sign token function from auth
-const { signToken } = require('../utils/auth');
 
 module.exports = {
-  // get a single user by either their id or their username
   async getSingleUser({ user = null, params }, res) {
     const foundUser = await User.findOne({
       $or: [{ _id: user ? user._id : params.id }, { username: params.username }],
@@ -16,32 +14,78 @@ module.exports = {
 
     res.json(foundUser);
   },
-  // create a user, sign a token, and send it back (to client/src/components/SignUpForm.js)
-  async createUser({ body }, res) {
-    const user = await User.create(body);
 
-    if (!user) {
-      return res.status(400).json({ message: 'Something is wrong!' });
-    }
-    const token = signToken(user);
-    res.json({ token, user });
+  async register({ body }, res) {
+    const existingUser = await User.findOne({ email: body.email });
+    
+    if (existingUser)
+      return res.status(400).json({
+        errorMessage: "There is an existing account associated with this email address."
+      });
+
+    const newUser = await User.create(body);
+
+    const token = jwt.sign(
+      {
+        user: newUser._id,
+      },
+      "shutitupyou"
+    );
+
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      }).send();
   },
 
   async login({ body }, res) {
-    const user = await User.findOne({ $or: [{ username: body.username }, { email: body.email }] });
-    if (!user) {
-      return res.status(400).json({ message: "Can't find this user" });
-    }
+    const user = await User.findOne({ email: body.email });
 
+    if(!user) {
+      return res.status(410).json({ errorMessage: "Incorrect username or email" });
+    }
+    
     const correctPw = await user.isCorrectPassword(body.password);
 
     if (!correctPw) {
-      return res.status(400).json({ message: 'Wrong password!' });
+      return res.status(401).json({ message: "Incorrect username or email" });
     }
-    const token = signToken(user);
-    res.json({ token, user });
+
+        const token = jwt.sign(
+      {
+        user: user._id,
+      },
+      "shutitupyou"
+    );
+
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      }).send();
   },
- 
+  
+  logout(req, res) {
+    res.cookie("token", "", {
+      httpOnly: true,
+      expires: new Date(0),
+      secure: true,
+      sameSite: "none",
+    }).send();
+  },
+
+  async loggedin(req, res) {
+    let token = req.cookies.token;
+    console.log(token);
+
+    if (!token) return res.json(false);
+
+    jwt.verify(token, "shutitupyou");
+
+    res.send(true);
+  },
+
   async saveMed({ user, body }, res) {
     console.log(user);
     try {
@@ -68,4 +112,13 @@ module.exports = {
     }
     return res.json(updatedUser);
   },
-};
+}
+
+
+
+
+
+
+
+
+
