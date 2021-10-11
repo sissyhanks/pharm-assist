@@ -3,6 +3,18 @@ const jwt = require("jsonwebtoken");
 const { User } = require('../models');
 
 module.exports = {
+  async getSingleUser({ user = null, params }, res) {
+    const foundUser = await User.findOne({
+      $or: [{ _id: user ? user._id : params.id }, { username: params.username }],
+    });
+
+    if (!foundUser) {
+      return res.status(400).json({ message: 'Cannot find a user with this id!' });
+    }
+
+    res.json(foundUser);
+  },
+
   async register({ body }, res) {
     const existingUser = await User.findOne({ email: body.email });
     
@@ -64,13 +76,42 @@ module.exports = {
   },
 
   async loggedin(req, res) {
-    const token = req.cookie;
+    let token = req.cookies.token;
+    console.log(token);
+
     if (!token) return res.json(false);
 
     jwt.verify(token, "shutitupyou");
 
     res.send(true);
-  }
+  },
+
+  async saveMed({ user, body }, res) {
+    console.log(user);
+    try {
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: user._id },
+        { $addToSet: { medlist: body } },
+        { new: true, runValidators: true }
+      );
+      return res.json(updatedUser);
+    } catch (err) {
+      console.log(err);
+      return res.status(400).json(err);
+    }
+  },
+  // remove a book from `savedBooks`
+  async deleteMed({ user, params }, res) {
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: user._id },
+      { $pull: { medlist: { name: params.medicineName } } },
+      { new: true }
+    );
+    if (!updatedUser) {
+      return res.status(404).json({ message: "Couldn't find user with this id!" });
+    }
+    return res.json(updatedUser);
+  },
 }
 
 

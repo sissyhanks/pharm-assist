@@ -1,9 +1,8 @@
 const router = require('express').Router();
 const {
-  // createUser,
-  // getSingleUser,
-  // saveMed,
-  // deleteMed,
+  getSingleUser,
+  saveMed,
+  deleteMed,
   login,
   register,
   logout,
@@ -16,6 +15,10 @@ router.route('/register').post(register);
 router.route('/login').post(login);
 router.route('/logout').get(logout);
 router.route('/loggedin').get(loggedin);
+router.route('/getSingleUser').get(getSingleUser);
+router.route('/saveMed').post(saveMed);
+router.route('/deleteMed').get(deleteMed);
+
 
 module.exports = router;
 
