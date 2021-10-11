@@ -6,7 +6,8 @@ const {
   // deleteMed,
   login,
   register,
-  logout
+  logout,
+  loggedin
 } = require('../../controllers/user-controller');
 
 // http://localhost:3001/api/users
@@ -14,6 +15,7 @@ const {
 router.route('/register').post(register);
 router.route('/login').post(login);
 router.route('/logout').get(logout);
+router.route('/loggedin').get(loggedin);
 
 module.exports = router;
 

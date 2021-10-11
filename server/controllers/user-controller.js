@@ -61,6 +61,15 @@ module.exports = {
       secure: true,
       sameSite: "none",
     }).send();
+  },
+
+  async loggedin(req, res) {
+    const token = req.cookie;
+    if (!token) return res.json(false);
+
+    jwt.verify(token, "shutitupyou");
+
+    res.send(true);
   }
 }
 
