@@ -4,13 +4,14 @@ const {
   // getSingleUser,
   // saveMed,
   // deleteMed,
-  // login,
+  login,
   register
 } = require('../../controllers/user-controller');
 
 // http://localhost:3001/api/users
 
 router.route('/register').post(register);
+router.route('/login').post(login);
 
 module.exports = router;
 
