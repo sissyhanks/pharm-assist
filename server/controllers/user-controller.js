@@ -52,6 +52,15 @@ module.exports = {
         secure: true,
         sameSite: "none",
       }).send();
+  },
+  
+  logout(req, res) {
+    res.cookie("token", "", {
+      httpOnly: true,
+      expires: new Date(0),
+      secure: true,
+      sameSite: "none",
+    }).send();
   }
 }
 

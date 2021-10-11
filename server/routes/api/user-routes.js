@@ -5,13 +5,15 @@ const {
   // saveMed,
   // deleteMed,
   login,
-  register
+  register,
+  logout
 } = require('../../controllers/user-controller');
 
 // http://localhost:3001/api/users
 
 router.route('/register').post(register);
 router.route('/login').post(login);
+router.route('/logout').get(logout);
 
 module.exports = router;
 
