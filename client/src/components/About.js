@@ -1,35 +1,40 @@
-import React from "react";
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import Form from 'react-bootstrap/Form';
-import getInteraction from '../ApiFiles/App.js';
+import { Form } from 'react-bootstrap';
+import getInteraction from '../ApiFiles/API.js';
 
+export default function About() {
+  const [landingFormData, setLandingFormData] = useState({ medicationOne: '', medicationTwo: '' });
+  const [showAlert, setShowAlert] = useState(false);
 
-  // create method to search for books and set state on form submit
-  const handleFormSubmit = async (event) => {
+   const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setLandingFormData({ ...landingFormData, [name]: value });
+  };
+
+    const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    if (!searchInput) {
-      return false;
+    // check if form has everything (as per react-bootstrap docs)
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
     }
 
     try {
 
-
-      const response = await getInteraction(searchInput1, searchInput2);
-
-      if (!response.ok) {
-        throw new Error('please try again!');
-      }
-
-      // action on response
-
     } catch (err) {
       console.error(err);
+      setShowAlert(true);
     }
+
+    setLandingFormData({
+      medicationOne: '',
+      medicationTwo: '',
+    });
   };
 
-
-export default function About() {
   return (
     <main>
       <div className="container">
@@ -58,16 +63,30 @@ export default function About() {
           <div className="col-md-6 pt-5">
             <h2>Check Interactions between Medications</h2>
             <Form onSubmit={handleFormSubmit}>
-
               <Form.Group>
-                <Form.Label htmlFor="Medication 1" className="form-control mt-3"></Form.Label>
-                {/* <Form.Control id="Med1" name="SearchInput1" type="text" value={this.state.name} onChange={(e) => setSearchInput(e.target.value)} /> */}
-                <Form.Control id="Med1" name="SearchInput1" type="text" value={this.state.name} />
+                <Form.Label htmlFor='medicationOne'></Form.Label>
+                <Form.Control
+                  type='text'
+                  placeholder='Medication 1'
+                  name='medicationOne'
+                  onChange={handleInputChange}
+                  value={landingFormData.medicationOne}
+                  required
+                />
+                <Form.Control.Feedback type='invalid'>Please enter a medication name.</Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group>
-                <Form.Label htmlFor="Medication 2" className="form-control mt-3 mb3"></Form.Label>
-                <Form.Control id="Med2" name="SearchInput2" type="text" value={this.state.name} onChange={(e) => setSearchInput(e.target.value)} />
+                <Form.Label htmlFor='medicationTwo'></Form.Label>
+                <Form.Control
+                  type='text'
+                  placeholder='Medication 2'
+                  name='medicationTwo'
+                  onChange={handleInputChange}
+                  value={landingFormData.medicationTwo}
+                  required
+                />
+                <Form.Control.Feedback type='invalid'>Please enter a medication name.</Form.Control.Feedback>
               </Form.Group>
 
               <button className="btn btn-outline-info" type="submit">Compare</button>
