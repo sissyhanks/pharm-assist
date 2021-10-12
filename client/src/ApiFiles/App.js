@@ -40,13 +40,13 @@
 // export default Example;
 
 import React, { useEffect, useState } from 'react';
-import getRxcuiInfo from './components/DrugInfo';
-import withListLoading from './components/withListLoading';
+import getRxcuiInfo from './DrugInfo';
+import withListLoading from './withListLoading';
 import axios from 'axios';
 
 // start here-- app called from index.js
 // calls withListLoading and passes get RxcuiInfo
-function App() {
+function getInteraction() {
   const ListLoading = withListLoading(getRxcuiInfo);
   const [appState, setAppState] = useState({
     loading: false,
@@ -100,4 +100,4 @@ function App() {
   );
 }
 
-export default App;
+export default getInteraction;

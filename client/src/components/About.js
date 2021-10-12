@@ -1,5 +1,33 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Form from 'react-bootstrap/Form';
+import getInteraction from '../ApiFiles/App.js';
+
+
+  // create method to search for books and set state on form submit
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!searchInput) {
+      return false;
+    }
+
+    try {
+
+
+      const response = await getInteraction(searchInput1, searchInput2);
+
+      if (!response.ok) {
+        throw new Error('please try again!');
+      }
+
+      // action on response
+
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
 
 export default function About() {
   return (
@@ -29,14 +57,34 @@ export default function About() {
         <div className="row">
           <div className="col-md-6 pt-5">
             <h2>Check Interactions between Medications</h2>
-            <form>
-              <input className="form-control mt-3 " type="text" placeholder="Medication Name" aria-label="Username"/>
-              <input className="form-control mt-3 mb-3" type="text" placeholder="Medication Name" aria-label="Password"/>
+            <Form onSubmit={handleFormSubmit}>
+
+              <Form.Group>
+                <Form.Label htmlFor="Medication 1" className="form-control mt-3"></Form.Label>
+                {/* <Form.Control id="Med1" name="SearchInput1" type="text" value={this.state.name} onChange={(e) => setSearchInput(e.target.value)} /> */}
+                <Form.Control id="Med1" name="SearchInput1" type="text" value={this.state.name} />
+              </Form.Group>
+
+              <Form.Group>
+                <Form.Label htmlFor="Medication 2" className="form-control mt-3 mb3"></Form.Label>
+                <Form.Control id="Med2" name="SearchInput2" type="text" value={this.state.name} onChange={(e) => setSearchInput(e.target.value)} />
+              </Form.Group>
+
               <button className="btn btn-outline-info" type="submit">Compare</button>
-            </form>
+            </Form>
+
           </div>
+
           <div className="col-md-6 pt-5">
             { /* Widget goes here */ }
+
+            <div id="goodrx_search_widget"> </div>
+                        {/* <script>
+                            var _grxdn = "lipitor";
+                            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+                            g.src="//s3.amazonaws.com/assets.goodrx.com/static/widgets/search.min.js";
+                                s.parentNode.insertBefore(g,s)}(document,"script"));
+                        </script> */}
           </div>
         </div>
       </div>
