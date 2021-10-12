@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Form } from 'react-bootstrap';
 import getInteraction from '../ApiFiles/API.js';
 
+
 export default function About() {
   const [landingFormData, setLandingFormData] = useState({ medicationOne: '', medicationTwo: '' });
   const [showAlert, setShowAlert] = useState(false);
@@ -95,15 +96,7 @@ export default function About() {
           </div>
 
           <div className="col-md-6 pt-5">
-            { /* Widget goes here */ }
-
-            <div id="goodrx_search_widget"> </div>
-                        {/* <script>
-                            var _grxdn = "lipitor";
-                            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-                            g.src="//s3.amazonaws.com/assets.goodrx.com/static/widgets/search.min.js";
-                                s.parentNode.insertBefore(g,s)}(document,"script"));
-                        </script> */}
+          <div id="goodrx_search_widget"> </div>
           </div>
         </div>
       </div>
