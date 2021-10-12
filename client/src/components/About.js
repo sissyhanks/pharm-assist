@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+
 export default function About() {
   return (
     <main>
@@ -36,7 +37,7 @@ export default function About() {
             </form>
           </div>
           <div className="col-md-6 pt-5">
-            { /* Widget goes here */ }
+          <div id="goodrx_search_widget"> </div>
           </div>
         </div>
       </div>
