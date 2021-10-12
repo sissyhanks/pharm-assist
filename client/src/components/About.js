@@ -1,8 +1,41 @@
-import React from "react";
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import { Form } from 'react-bootstrap';
+import getInteraction from '../ApiFiles/API.js';
 
 
 export default function About() {
+  const [landingFormData, setLandingFormData] = useState({ medicationOne: '', medicationTwo: '' });
+  const [showAlert, setShowAlert] = useState(false);
+
+   const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setLandingFormData({ ...landingFormData, [name]: value });
+  };
+
+    const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    // check if form has everything (as per react-bootstrap docs)
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    try {
+
+    } catch (err) {
+      console.error(err);
+      setShowAlert(true);
+    }
+
+    setLandingFormData({
+      medicationOne: '',
+      medicationTwo: '',
+    });
+  };
+
   return (
     <main>
       <div className="container">
@@ -30,12 +63,38 @@ export default function About() {
         <div className="row">
           <div className="col-md-6 pt-5">
             <h2>Check Interactions between Medications</h2>
-            <form>
-              <input className="form-control mt-3 " type="text" placeholder="Medication Name" aria-label="Username"/>
-              <input className="form-control mt-3 mb-3" type="text" placeholder="Medication Name" aria-label="Password"/>
+            <Form onSubmit={handleFormSubmit}>
+              <Form.Group>
+                <Form.Label htmlFor='medicationOne'></Form.Label>
+                <Form.Control
+                  type='text'
+                  placeholder='Medication 1'
+                  name='medicationOne'
+                  onChange={handleInputChange}
+                  value={landingFormData.medicationOne}
+                  required
+                />
+                <Form.Control.Feedback type='invalid'>Please enter a medication name.</Form.Control.Feedback>
+              </Form.Group>
+
+              <Form.Group>
+                <Form.Label htmlFor='medicationTwo'></Form.Label>
+                <Form.Control
+                  type='text'
+                  placeholder='Medication 2'
+                  name='medicationTwo'
+                  onChange={handleInputChange}
+                  value={landingFormData.medicationTwo}
+                  required
+                />
+                <Form.Control.Feedback type='invalid'>Please enter a medication name.</Form.Control.Feedback>
+              </Form.Group>
+
               <button className="btn btn-outline-info" type="submit">Compare</button>
-            </form>
+            </Form>
+
           </div>
+
           <div className="col-md-6 pt-5">
           <div id="goodrx_search_widget"> </div>
           </div>
