@@ -1,6 +1,5 @@
-// import user model
-const jwt = require("jsonwebtoken");
 const { User } = require('../models');
+const { signToken } = require('../utils/auth');
 
 module.exports = {
   async getSingleUser({ user = null, params }, res) {
@@ -15,6 +14,7 @@ module.exports = {
     res.json(foundUser);
   },
 
+//register
   async register({ body }, res) {
     const existingUser = await User.findOne({ email: body.email });
     
@@ -25,19 +25,18 @@ module.exports = {
 
     const newUser = await User.create(body);
 
-    const token = jwt.sign(
-      {
-        user: newUser._id,
-      },
-      "shutitupyou"
-    );
-
-    res.cookie("token", token, {
+    if (!newUser) {
+      return res.status(400).json({ message: 'Something is wrong!' });
+      }
+      const token = signToken(newUser);
+      // res.json({ token, newUser });
+      res.cookie("token", token, {
         httpOnly: true,
         secure: true,
         sameSite: "none",
       }).send();
   },
+
 
   async login({ body }, res) {
     const user = await User.findOne({ email: body.email });
@@ -113,12 +112,3 @@ module.exports = {
     return res.json(updatedUser);
   },
 }
-
-
-
-
-
-
-
-
-

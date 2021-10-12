@@ -5,13 +5,11 @@ import getInteraction from '../ApiFiles/API.js';
 
 
 export default function About() {
-  const [landingFormData, setLandingFormData] = useState({ medicationOne: '', medicationTwo: '' });
+  const [medicationOne, setMedicationOne] = useState('');
+  const [medicationTwo, setMedicationTwo] = useState('');
   const [showAlert, setShowAlert] = useState(false);
 
-   const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setLandingFormData({ ...landingFormData, [name]: value });
-  };
+
 
     const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -30,10 +28,8 @@ export default function About() {
       setShowAlert(true);
     }
 
-    setLandingFormData({
-      medicationOne: '',
-      medicationTwo: '',
-    });
+    setMedicationOne('');
+    setMedicationTwo('');
   };
 
   return (
@@ -70,8 +66,10 @@ export default function About() {
                   type='text'
                   placeholder='Medication 1'
                   name='medicationOne'
-                  onChange={handleInputChange}
-                  value={landingFormData.medicationOne}
+          onChange={(e) => {
+            setMedicationOne(e.target.value);
+          }}
+          value={medicationOne}
                   required
                 />
                 <Form.Control.Feedback type='invalid'>Please enter a medication name.</Form.Control.Feedback>
@@ -83,8 +81,10 @@ export default function About() {
                   type='text'
                   placeholder='Medication 2'
                   name='medicationTwo'
-                  onChange={handleInputChange}
-                  value={landingFormData.medicationTwo}
+          onChange={(e) => {
+            setMedicationTwo(e.target.value);
+          }}
+          value={medicationTwo}
                   required
                 />
                 <Form.Control.Feedback type='invalid'>Please enter a medication name.</Form.Control.Feedback>
