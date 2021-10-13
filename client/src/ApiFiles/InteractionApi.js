@@ -5,9 +5,10 @@ import axios from 'axios';
 
 // start here-- app called from index.js
 // calls withListLoading and passes get RxcuiInfo
-function getInteraction() {
-
-}
+const getInteraction = (query, query2) => {
+        // query contains MedOne
+        return fetch(`https://rxnav.nlm.nih.gov/REST/interaction/list.json?rxcuis=${query}+${query2}`);
+    };
 
 // function getTemplate() {
 //   const ListLoading = withListLoading(getRxcuiInfo);
