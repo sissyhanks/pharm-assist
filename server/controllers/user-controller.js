@@ -29,15 +29,10 @@ module.exports = {
       return res.status(400).json({ message: 'Something is wrong!' });
       }
       const token = signToken(newUser);
-      // res.json({ token, newUser });
-      res.cookie("token", token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "none",
-      }).send();
+      res.json({ token, newUser });
   },
 
-
+//login
   async login({ body }, res) {
     const user = await User.findOne({ email: body.email });
 
@@ -51,20 +46,11 @@ module.exports = {
       return res.status(401).json({ message: "Incorrect username or email" });
     }
 
-        const token = jwt.sign(
-      {
-        user: user._id,
-      },
-      "shutitupyou"
-    );
-
-    res.cookie("token", token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "none",
-      }).send();
+    const token = signToken(user);
+    res.json({ token, user });
   },
   
+//logout
   logout(req, res) {
     res.cookie("token", "", {
       httpOnly: true,

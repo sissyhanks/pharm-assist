@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { createUser } from '../utils/API';
-
+// import { createUser } from '../utils/API';
+import axios from "axios";
 
 export default function SignUp() {
   const [ email, setEmail ] = useState('');
@@ -15,31 +15,24 @@ export default function SignUp() {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
-    // const form = event.currentTarget;
-    // if (form.checkValidity() === false) {
-    //   event.preventDefault();
-    //   event.stopPropagation();
-    // }
+      try {
+      const registerData = {
+        firstName,
+        lastName,
+        username,
+        email,
+        password,
+      };
 
-    try {
-      const response = await createUser(firstName, lastName, email, password, username);
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const { token, user } = await response.json();
-      console.log(user);
-      // Auth.login(token);
+      await axios.post(
+        "http://localhost:3001/api/users/register",
+        registerData
+      );
+      // await getLoggedIn();
+      // history.push("/");
     } catch (err) {
       console.error(err);
-      // setShowAlert(true);
     }
-
-    // setUserFormData({
-    //   email: '', username: '',  password: '', firstName: '', lastName: ''
-    // });
   };
 
   return (
