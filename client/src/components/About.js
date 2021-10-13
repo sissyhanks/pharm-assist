@@ -57,8 +57,6 @@ export default function About() {
       console.log("The RXCUI number for " + drugs.drugGroup.name + "is: " + drugs.drugGroup.conceptGroup[1].conceptProperties[0].rxcui );
 
 // XXXX We need to clear the form when we are finished
-    // setMedicationOne("");
-    // setMedicationTwo("");
 
     } catch (err) {
       console.error(err);
