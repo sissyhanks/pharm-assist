@@ -1,7 +1,7 @@
 // called from About.js line 47
 const getRxcui = (query) => {
     // query contains MedOne
-    console.log("Variable Check 1: " + query);
+    console.log("Variable Check: " + query);
     return fetch(`https://rxnav.nlm.nih.gov/REST/drugs.json?name=${query}`);
 };
 

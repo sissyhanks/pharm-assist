@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import getRxcui from "../ApiFiles/RxcuiApi.js"
+import getInteraction from "../ApiFiles/InteractionApi.js";
 
 
 //XXXX Ref MERN SearchBooks.js line 8
@@ -45,16 +46,36 @@ export default function About() {
 
     try {
       const response = await getRxcui(MedOne);
-      console.log("Variable Check 2: " + MedOne);
+      const response2 = await getRxcui(MedTwo)
+      // console.log("Variable Check 2: " + MedOne);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
       }
 
-      const drugs  = await response.json();
+      const drug1  = await response.json();
+      const drug2 = await response2.json();
       // API Call is working
+      const drug1name = drug1.drugGroup.name
+      const drug2name = drug2.drugGroup.name 
+      const drugarray1 = drug1.drugGroup.conceptGroup.length-1
+      const drugarray2 = drug2.drugGroup.conceptGroup.length-1
+      console.log(drugarray1)
+      console.log(drugarray2)
+      const drug1num = drug1.drugGroup.conceptGroup[drugarray1].conceptProperties[0].rxcui 
+      const drug2num = drug2.drugGroup.conceptGroup[drugarray2].conceptProperties[0].rxcui 
+      console.log("The RXCUI number for " + drug1name + " is: " + drug1num);
+      console.log("The RXCUI number for " + drug2name + " is: " + drug2num);
+      const interactionCheck = await getInteraction(drug1num, drug2num)
+      const intResponse = await interactionCheck.json();
+      const description =  intResponse.fullInteractionTypeGroup[0].fullInteractionType[0].interactionPair[0].description
+      console.log(intResponse.fullInteractionTypeGroup[0].fullInteractionType[0].interactionPair[0].description)
+      if (description) {
+        alert(description + " Consult a medical professional.")
+      } else{
+        alert("No negative interactions found!")
+      }
       
-      console.log("The RXCUI number for " + drugs.drugGroup.name + "is: " + drugs.drugGroup.conceptGroup[1].conceptProperties[0].rxcui );
 
 // XXXX We need to clear the form when we are finished
 
@@ -94,9 +115,9 @@ export default function About() {
         </div>
       </div>
       <div className="container-fluid">
-        <div class="row">
+        <div className="row">
           <div
-            class="col-lg-12 text-center p-3"
+            className="col-lg-12 text-center p-3"
             style={{ backgroundColor: "#A2C4C9" }}
           >
             <Link to="/sign-up">Sign up</Link> to customize your medication
