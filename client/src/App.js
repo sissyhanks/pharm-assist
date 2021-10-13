@@ -50,22 +50,31 @@ class PButton extends React.Component {
 }
 // export default PButton;
 
+// App is called from src/index.js
 export default function App() {
   return (
     <main>
       <Router>
         <Navbar />
+
         <Switch>
-          <Route exact path="/">
-            <About />
-          </Route>
+
+{/* XXXX Temporarily changed this route to check operation  */}
+          {/* <Route exact path="/"> */}
+            {/* <About /> */}
+          {/* </Route> */}
+          <Route exact path="/" component={ About } />
+
           <Route exact path="/sign-up">
             <SignUp />
           </Route>
+
           <Route exact path="/med-list">
             <MedList />
           </Route>
+
         </Switch>
+
       </Router>
     </main>
   );
