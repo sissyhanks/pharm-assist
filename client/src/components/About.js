@@ -68,12 +68,15 @@ export default function About() {
       console.log("The RXCUI number for " + drug2name + " is: " + drug2num);
       const interactionCheck = await getInteraction(drug1num, drug2num)
       const intResponse = await interactionCheck.json();
-      const description =  intResponse.fullInteractionTypeGroup[0].fullInteractionType[0].interactionPair[0].description
-      console.log(intResponse.fullInteractionTypeGroup[0].fullInteractionType[0].interactionPair[0].description)
-      if (description) {
-        alert(description + " Consult a medical professional.")
-      } else{
+      const exists = JSON.stringify(intResponse).includes("DrugBank is intended for educational and scientific research purposes only and you expressly acknowledge and agree that use of DrugBank is at your sole risk.");
+      console.log(exists)
+    
+      // console.log(description)
+      if (exists == false) {
         alert("No negative interactions found!")
+      } else{
+        const description =  intResponse.fullInteractionTypeGroup[0].fullInteractionType[0].interactionPair[0].description
+        alert(description + " Consult a medical professional.")
       }
       
 
