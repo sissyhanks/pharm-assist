@@ -64,9 +64,15 @@ export default function SignUp() {
       </div>
     
       
-      <div className="col-12">
+      {/* <div className="col-12">
         <button type="submit" className="btn btn-primary">Sign in</button>
-      </div>
+      </div> */}
+  <div className="col-12">
+  <button className="btn btn-outline-info" type="submit">
+                Sign In
+              </button>
+
+              </div>
     </form>
     
   </div>
