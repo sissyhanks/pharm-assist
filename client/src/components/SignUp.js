@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { useHistory } from "react-router-dom";
 // import { createUser } from '../utils/API';
+import AuthContext from "../context/AuthContext.js";
 import axios from "axios";
 
 export default function SignUp() {
@@ -9,8 +11,8 @@ export default function SignUp() {
   const [ lastName, setLastName ] = useState('');
   const [ username, setUserName ] = useState('');
 
-
-
+  const { getLoggedIn } = useContext(AuthContext);
+  const history = useHistory();
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -26,10 +28,11 @@ export default function SignUp() {
 
       await axios.post(
         "http://localhost:3001/api/users/register",
-        registerData
+        registerData,
+        { withCredentials: true }
       );
-      // await getLoggedIn();
-      // history.push("/");
+      await getLoggedIn();
+      history.push("/");
     } catch (err) {
       console.error(err);
     }

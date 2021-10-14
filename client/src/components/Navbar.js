@@ -1,5 +1,7 @@
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { useHistory } from "react-router-dom";
+import AuthContext from "../context/AuthContext.js";
 import { Link } from 'react-router-dom';
 
 import axios from "axios";
@@ -10,6 +12,9 @@ export default function Navbar() {
 const [ username, setUserName ] = useState('');
 const [ password, setPassword ] = useState('');
 
+const { loggedIn } = useContext(AuthContext);
+const { getLoggedIn } = useContext(AuthContext);
+const history = useHistory();
 
 //event handling for login button
 const handleFormSubmit = async (event) => {
@@ -21,15 +26,25 @@ const handleFormSubmit = async (event) => {
       };
 
       await axios.post(
-        "http://localhost:3001/api/users/register",
-        registerData
+        "http://localhost:3001/api/users/login",
+        registerData,
+        { withCredentials: true }
       );
-      
-    } 
-	catch (err) {
+      await getLoggedIn();
+      history.push("/");    
+    } catch (err) {
       console.error(err);
     }
   };
+
+  const handleLogOut = async (event) => {
+      await axios.get(
+      "http://localhost:3001/api/users/logout"
+    );
+    await getLoggedIn();
+    history.push("/");
+  }
+
   return (
     <nav className="navbar navbar-expand-lg App-header">
       <Link className="navbar-brand" to="/"><strong>Pharm-Assist</strong></Link>
@@ -38,14 +53,18 @@ const handleFormSubmit = async (event) => {
       </button>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
+          {loggedIn === false && (
           <li className="nav-item">
             <Link className="navbar-brand" to="/sign-up">Sign Up</Link>
           </li>
+          )}
+          {loggedIn === true && (
           <li className="nav-item">
             <Link className="navbar-brand" to="/med-list">Med List</Link>
           </li>
+          )}
         </ul>
-		  
+          {loggedIn === false && (
           <form onSubmit={handleFormSubmit} className="d-flex">
 		  
 		  <input type="text" className="form-control" id="inputUsername" placeholder="Username" onChange={(e) => setUserName(e.target.value)} value={username}/>
@@ -53,7 +72,10 @@ const handleFormSubmit = async (event) => {
             
             <button className="btn btn-outline-success" type="submit" >Login</button>
           </form>
-		  
+          )}
+          {loggedIn === true && (
+          <button onClick={handleLogOut} className="btn btn-outline-success" type="submit">Log Out</button>
+          )}
         </div>
       </nav>
   );
