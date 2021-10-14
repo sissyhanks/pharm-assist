@@ -1,5 +1,6 @@
 const { User } = require('../models');
 const { signToken } = require('../utils/auth');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
   async getSingleUser({ user = null, params }, res) {
@@ -27,9 +28,16 @@ module.exports = {
 
     if (!newUser) {
       return res.status(400).json({ message: 'Something is wrong!' });
-      }
-      const token = signToken(newUser);
-      res.json({ token, newUser });
+    }
+    const token = signToken(newUser);
+    // res.json({ token, newUser });
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      })
+      .send();
   },
 
 //login
@@ -47,7 +55,14 @@ module.exports = {
     }
 
     const token = signToken(user);
-    res.json({ token, user });
+
+    res
+    .cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    })
+    .send();
   },
   
 //logout
@@ -61,14 +76,16 @@ module.exports = {
   },
 
   async loggedin(req, res) {
-    let token = req.cookies.token;
-    console.log(token);
-
+  try {
+    const token = req.cookies.token;
     if (!token) return res.json(false);
 
-    jwt.verify(token, "shutitupyou");
+    jwt.verify(token, 'mysecretsshhhhh');
 
     res.send(true);
+  } catch (err) {
+    res.json(false);
+  }
   },
 
   async saveMed({ user, body }, res) {
