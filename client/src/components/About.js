@@ -37,19 +37,25 @@ export default function About() {
 
       const drug1  = await response.json();
       const drug2 = await response2.json();
-      // API Call is working
+
       const drug1name = drug1.drugGroup.name
       const drug2name = drug2.drugGroup.name 
+
       const drugarray1 = drug1.drugGroup.conceptGroup.length-1
       const drugarray2 = drug2.drugGroup.conceptGroup.length-1
+
       console.log(drugarray1)
       console.log(drugarray2)
+
       const drug1num = drug1.drugGroup.conceptGroup[drugarray1].conceptProperties[0].rxcui 
       const drug2num = drug2.drugGroup.conceptGroup[drugarray2].conceptProperties[0].rxcui 
+
       console.log("The RXCUI number for " + drug1name + " is: " + drug1num);
       console.log("The RXCUI number for " + drug2name + " is: " + drug2num);
+
       const interactionCheck = await getInteraction(drug1num, drug2num)
       const intResponse = await interactionCheck.json();
+
       const exists = JSON.stringify(intResponse).includes("DrugBank is intended for educational and scientific research purposes only and you expressly acknowledge and agree that use of DrugBank is at your sole risk.");
       console.log(exists)
     
@@ -61,7 +67,6 @@ export default function About() {
         alert(description + " Consult a medical professional.")
       }
       
-
       // Clear comparison Form
       setMedicationOne('');
       setMedicationTwo('');
@@ -124,7 +129,6 @@ export default function About() {
 
             <h3>Check Interactions between Medications</h3>
 
-{/* See MERN SearchBooks.js line 86 */}
 {/* handleFormSubmit is at line 18 */}
             {/* Medication to Compare Form */}
             <Form onSubmit={handleFormSubmit}>
