@@ -76,14 +76,16 @@ module.exports = {
   },
 
   async loggedin(req, res) {
-    let token = req.cookies.token;
-    console.log(token);
-
+  try {
+    const token = req.cookies.token;
     if (!token) return res.json(false);
 
-    jwt.verify(token, "shutitupyou");
+    jwt.verify(token, 'mysecretsshhhhh');
 
     res.send(true);
+  } catch (err) {
+    res.json(false);
+  }
   },
 
   async saveMed({ user, body }, res) {
