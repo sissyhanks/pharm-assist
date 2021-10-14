@@ -1,7 +1,41 @@
-import React from "react";
+import {React, useState} from "react";
+import axios from "axios";
 
 
 export default function MedList() {
+
+    const [ title, setTitle ] = useState('');
+    const [ morning, setMorning ] = useState('false');
+    const [ afternoon, setAfternoon ] = useState('false');
+    const [ evening, setEvening ] = useState('false');
+    const [ night, setNight ] = useState('false');
+    const [ as_needed, setAsNeeded] = useState('false');
+
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+
+        try{
+            const medicineData = {
+                title,
+                morning,
+                afternoon,
+                evening,
+                night,
+                as_needed,
+            }
+            await axios.post(
+                "http://localhost:3001/api/users/saveMed",
+                medicineData
+              );
+              // await getLoggedIn();
+              // history.push("/");
+            } catch (err) {
+              console.error(err);
+            }
+          };
+        
+        
+  
     const data = [{
       "title": "Wellbutrin",
       "id": 1,
