@@ -55,7 +55,14 @@ module.exports = {
     }
 
     const token = signToken(user);
-    res.json({ token, user });
+
+    res
+    .cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    })
+    .send();
   },
   
 //logout
