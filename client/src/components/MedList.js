@@ -1,4 +1,5 @@
-import {React, useState} from "react";
+import React from "react";
+import { useState } from "react";
 import axios from "axios";
 
 
@@ -11,7 +12,7 @@ export default function MedList() {
     const [ night, setNight ] = useState('false');
     const [ as_needed, setAsNeeded] = useState('false');
 
-    const handleFormSubmit = async (event) => {
+    const handlenewMedSubmit = async (event) => {
         event.preventDefault();
 
         try{
@@ -33,7 +34,14 @@ export default function MedList() {
               console.error(err);
             }
           };
-        
+    const handleDeleteMed = async (event) => {
+        event.preventDefault();
+        try{
+            
+        } catch (err){
+            console.error(err)
+        }
+    };
         
   
     const data = [{
