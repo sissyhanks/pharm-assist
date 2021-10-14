@@ -42,16 +42,16 @@ module.exports = {
 
 //login
   async login({ body }, res) {
-    const user = await User.findOne({ email: body.email });
+    const user = await User.findOne({ username: body.username });
 
     if(!user) {
-      return res.status(410).json({ errorMessage: "Incorrect username or email" });
+      return res.status(410).json({ errorMessage: "Incorrect username or password" });
     }
     
     const correctPw = await user.isCorrectPassword(body.password);
 
     if (!correctPw) {
-      return res.status(401).json({ message: "Incorrect username or email" });
+      return res.status(401).json({ message: "Incorrect username or password" });
     }
 
     const token = signToken(user);
