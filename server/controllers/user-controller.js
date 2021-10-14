@@ -1,5 +1,6 @@
 const { User } = require('../models');
 const { signToken } = require('../utils/auth');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
   async getSingleUser({ user = null, params }, res) {
@@ -27,9 +28,16 @@ module.exports = {
 
     if (!newUser) {
       return res.status(400).json({ message: 'Something is wrong!' });
-      }
-      const token = signToken(newUser);
-      res.json({ token, newUser });
+    }
+    const token = signToken(newUser);
+    // res.json({ token, newUser });
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      })
+      .send();
   },
 
 //login
