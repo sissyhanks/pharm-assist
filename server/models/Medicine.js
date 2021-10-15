@@ -1,19 +1,29 @@
-const { Schema, model } = require('mongoose');
+const { Schema } = require('mongoose');
 
 const medicineSchema = new Schema(
   {
-    name: {
-      type: String
+    title: {
+      type: String,
+      required: true
     },
-    dosage: {
-      type: String
+    morning: {
+      type: Boolean
     },
-    schedule: {
-      type: String
+    afternoon: {
+      type: Boolean
     },
+    evening: {
+      type: Boolean
+    },
+    night: {
+      type: Boolean
+    },
+    as_needed: {
+      type: Boolean
+    }
   }
 );
 
-const medicine = model('medicine', medicineSchema)
 
-module.exports = medicineSchema, medicine;
+
+module.exports = medicineSchema;

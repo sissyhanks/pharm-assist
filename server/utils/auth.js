@@ -15,6 +15,8 @@ module.exports = {
     try {
       const verified = jwt.verify(token, secret);
       req.user = verified.user;
+            const { data } = jwt.verify(token, secret);
+      req.user = data;
     } catch (err) {
       console.error(err);
       res.status(401).json({ errorMessage: "Unauthorized" });

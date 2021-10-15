@@ -29,11 +29,14 @@ const UserSchema = new Schema(
       unique: true,
       match: [/.+@.+\..+/, 'Must use a valid email address'],
     },
-    medList: [medicineSchema]
-  },{
-  versionKey: false
+    medList: [medicineSchema],
+  },
+  {
+    toJSON: {
+      virtuals: true,
+    },
   }
-);
+  );
 
 UserSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {
@@ -49,6 +52,9 @@ UserSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
+// medicineSchema.virtual('medCount').get(function () {
+//   return this.savedMeds.length;
+// });
 
 const User = model('User', UserSchema);
 

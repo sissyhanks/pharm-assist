@@ -1,4 +1,4 @@
 const User = require('./User');
-const medlist = require('./Medicine')
+const Medicine = require('./Medicine')
 
-module.exports = { User, medlist };
+module.exports = { User, Medicine };

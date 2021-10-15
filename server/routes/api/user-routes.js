@@ -8,6 +8,7 @@ const {
   logout,
   loggedin
 } = require('../../controllers/user-controller');
+const { authMiddleware } = require('../../utils/auth');
 
 // http://localhost:3001/api/users
 
@@ -15,9 +16,9 @@ router.route('/register').post(register);
 router.route('/login').post(login);
 router.route('/logout').get(logout);
 router.route('/loggedin').get(loggedin);
-router.route('/getSingleUser').get(getSingleUser);
-router.route('/saveMed').post(saveMed);
-router.route('/deleteMed').get(deleteMed);
+router.route('/getSingleUser').get(authMiddleware, getSingleUser);
+router.route('/saveMed').post(authMiddleware, saveMed);
+router.route('/deleteMed').get(authMiddleware, deleteMed);
 
 
 module.exports = router;
