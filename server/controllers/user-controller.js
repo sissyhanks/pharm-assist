@@ -42,7 +42,7 @@ module.exports = {
 
 //login
   async login({ body }, res) {
-    const user = await User.findOne({ username: body.username });
+    const user = await User.findOne({ email: body.email });
 
     if(!user) {
       return res.status(410).json({ errorMessage: "Incorrect username or password" });

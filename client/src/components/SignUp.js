@@ -32,7 +32,7 @@ export default function SignUp() {
         { withCredentials: true }
       );
       await getLoggedIn();
-      history.push("/");
+      history.push("/med-list");
     } catch (err) {
       console.error(err);
     }

@@ -9,7 +9,7 @@ import axios from "axios";
 export default function Navbar() {
 
 //username tab password login at the extreme right of navbar
-const [ username, setUserName ] = useState('');
+const [ email, setEmail ] = useState('');
 const [ password, setPassword ] = useState('');
 
 const { loggedIn } = useContext(AuthContext);
@@ -22,7 +22,7 @@ const handleFormSubmit = async (event) => {
 
       try {
       const registerData = {
-                username, password,
+                email, password,
       };
 
       await axios.post(
@@ -31,7 +31,7 @@ const handleFormSubmit = async (event) => {
         { withCredentials: true }
       );
       await getLoggedIn();
-      history.push("/");    
+      history.push("/med-list");    
     } catch (err) {
       console.error(err);
     }
@@ -67,7 +67,7 @@ const handleFormSubmit = async (event) => {
           {loggedIn === false && (
           <form onSubmit={handleFormSubmit} className="d-flex">
 		  
-		  <input type="text" className="form-control" id="inputUsername" placeholder="Username" onChange={(e) => setUserName(e.target.value)} value={username}/>
+		  <input type="text" className="form-control" id="inputUsername" placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={email}/>
 		  <input type="password" className="form-control" id="inputPassword4" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password}/>
             
             <button className="btn btn-outline-success" type="submit" >Login</button>
