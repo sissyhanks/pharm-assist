@@ -138,5 +138,5 @@ export default function MedList() {
                 </tbody>
             </table>
         </>
-    )
+    );
 }
