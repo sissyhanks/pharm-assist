@@ -52,9 +52,9 @@ UserSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-// medicineSchema.virtual('medCount').get(function () {
-//   return this.savedMeds.length;
-// });
+medicineSchema.virtual('medCount').get(function () {
+  return this.medList.length;
+});
 
 const User = model('User', UserSchema);
 

@@ -43,26 +43,26 @@ export default function SignUp() {
       <h3>Sign Up</h3>
     <form onSubmit={handleFormSubmit} className="row g-3">
       <div className="col-md-12">
-        <label for="inputEmail4" className="form-label">Email</label>
+        <label htmlFor="inputEmail4" className="form-label">Email</label>
         <input type="email"  className="form-control" id="inputEmail4" onChange={(e) => setEmail(e.target.value)} value={email} />
       </div>
 
       <div className="col-6">
-        <label for="inputUsername" className="form-label">Username</label>
+        <label htmlFor="inputUsername" className="form-label">Username</label>
         <input type="text" className="form-control" id="inputUsername" placeholder="Username" onChange={(e) => setUserName(e.target.value)} value={username}/>
       </div>
 
       <div className="col-md-6">
-        <label for="inputPassword" className="form-label">Password</label>
+        <label htmlFor="inputPassword" className="form-label">Password</label>
         <input type="password" className="form-control" id="inputPassword4" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password}/>
       </div>
      
       <div className="col-6">
-        <label for="inputFName" className="form-label">First name</label>
+        <label htmlFor="inputFName" className="form-label">First name</label>
         <input type="text" className="form-control" id="inputFName" placeholder="First Name" onChange={(e) => setFirstName(e.target.value)} value={firstName}/>
       </div>
       <div className="col-md-6">
-        <label for="inputLName" className="form-label">Last Name</label>
+        <label htmlFor="inputLName" className="form-label">Last Name</label>
         <input type="text" className="form-control" id="inputLName" placeholder="Last Name" onChange={(e) => setLastName(e.target.value)} value={lastName}/>
       </div>
     
