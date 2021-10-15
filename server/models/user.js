@@ -31,11 +31,11 @@ const UserSchema = new Schema(
     },
     medList: [medicineSchema],
   },
-  {
-    toJSON: {
-      virtuals: true,
-    },
-  }
+  // {
+  //   toJSON: {
+  //     virtuals: true,
+  //   },
+  // }
   );
 
 UserSchema.pre('save', async function (next) {
@@ -52,9 +52,9 @@ UserSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-medicineSchema.virtual('medCount').get(function () {
-  return this.medList.length;
-});
+// medicineSchema.virtual('medCount').get(function () {
+//   return this.medList.length;
+// });
 
 const User = model('User', UserSchema);
 
