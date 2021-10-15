@@ -1,4 +1,5 @@
 const { User } = require('../models');
+const { Medicine } = require('../models');
 const { signToken } = require('../utils/auth');
 const jwt = require('jsonwebtoken');
 
@@ -93,7 +94,7 @@ module.exports = {
     try {
       const updatedUser = await User.findOneAndUpdate(
         { _id: user._id },
-        { $addToSet: { medlist: body } },
+        { $addToSet: { medList: body } },
         { new: true, runValidators: true }
       );
       return res.json(updatedUser);
