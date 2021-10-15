@@ -52,10 +52,11 @@ function Routed() {
     <main>
           <Router>
       <Navbar />
-      <Switch>
+      
         <Route exact path="/"> 
           <About />
         </Route>
+        <Switch>
         {loggedIn === false && (
           <>
             <Route exact path="/sign-up">
