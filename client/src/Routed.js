@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import About from "./components/about.js";
-import MedList from "./components/medList.js";
+import MedList from "./components/medlist.js";
 import Navbar from "./components/navbar.js";
 import SignUp from "./components/signup.js";
 import AuthContext from "./context/AuthContext";
