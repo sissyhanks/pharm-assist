@@ -30,19 +30,19 @@ import "./styles/App.css"
 // }
 
 // This button needed to print
-class PButton extends React.Component {
-  render() {
-    return (
-      <div>
-        <ReactToPrint
-          trigger={() => <button>Print this out!</button>}
-          content={() => this.componentRef}
-        />
-        <ComponentToPrint ref={(el) => (this.componentRef = el)} />
-      </div>
-    );
-  }
-}
+// class PButton extends React.Component {
+//   render() {
+//     return (
+//       <div>
+//         <ReactToPrint
+//           trigger={() => <button>Print this out!</button>}
+//           content={() => this.componentRef}
+//         />
+//         <ComponentToPrint ref={(el) => (this.componentRef = el)} />
+//       </div>
+//     );
+//   }
+// }
 
 function Routed() {
   const { loggedIn } = useContext(AuthContext);
