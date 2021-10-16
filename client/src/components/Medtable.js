@@ -11,6 +11,15 @@ export default function medTable(props) {
     //     }
     // };
     // console.log('THIS IS PROPS')
+
+    const renderHeader = () => {
+        let headerElement = ['id', 'title', 'morning', 'afternoon', 'evening', 'night', 'as needed']
+
+        return headerElement.map((key, index) => {
+            return <th key={index}>{key.toUpperCase()}</th>
+        })
+    }
+
     const displayMeds = (props) => {
         const {medlist} = props
         
@@ -18,16 +27,16 @@ export default function medTable(props) {
             return(
                 medlist.map((med, index) => {
                     console.log(med);
-                    return(
-                        <tr key={med._id}>
-                            <td>{med.id}</td>
-                            <td>{med.title}</td>
-                            <td><input type="checkbox" id={`medication_${med.id}_morning`} checked={med.morning} aria-label={`Checkbox for ${med.title} in the morning`} /></td>
-                            <td><input type="checkbox" id={`medication_${med.id}_afternoon`} checked={med.afternoon} aria-label={`Checkbox for ${med.title} in the afternoon`} /></td>
-                            <td><input type="checkbox" id={`medication_${med.id}_evening`} checked={med.evening} aria-label={`Checkbox for ${med.title} in the evening`} /></td>
-                            <td><input type="checkbox" id={`medication_${med.id}_night`} checked={med.night} aria-label={`Checkbox for ${med.title} in the night`} /></td>
-                            <td><input type="checkbox" id={`medication_${med.id}_as_needed`} checked={med.as_needed} aria-label={`Checkbox for ${med.title} as needed`} /></td>
-                        </tr>
+                    return (
+                                <tr key={med._id}>
+                                    <td>{med.id}</td>
+                                    <td>{med.title}</td>
+                                    <td><input type="checkbox" id={`medication_${med.id}_morning`} checked={med.morning} aria-label={`Checkbox for ${med.title} in the morning`} /></td>
+                                    <td><input type="checkbox" id={`medication_${med.id}_afternoon`} checked={med.afternoon} aria-label={`Checkbox for ${med.title} in the afternoon`} /></td>
+                                    <td><input type="checkbox" id={`medication_${med.id}_evening`} checked={med.evening} aria-label={`Checkbox for ${med.title} in the evening`} /></td>
+                                    <td><input type="checkbox" id={`medication_${med.id}_night`} checked={med.night} aria-label={`Checkbox for ${med.title} in the night`} /></td>
+                                    <td><input type="checkbox" id={`medication_${med.id}_as_needed`} checked={med.as_needed} aria-label={`Checkbox for ${med.title} as needed`} /></td>
+                                </tr>
                     )
                 })
             )
@@ -36,8 +45,13 @@ export default function medTable(props) {
         }
     }
     return (
-        <>
-        {displayMeds(props)}
-        </>
+        <table className="table table-striped">
+            <thead>
+                <tr>{renderHeader()}</tr>
+            </thead>
+            <tbody>
+                {displayMeds(props)}
+            </tbody>
+        </table>
     )
 }

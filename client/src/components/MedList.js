@@ -13,12 +13,9 @@ export default function MedList() {
     const [ night, setNight ] = useState(false);
     const [ as_needed, setAsNeeded] = useState(false);
 
-
-
     const handlenewMedSubmit = async (event) => {
         
-
-        try{
+        try {
             const medicineData = {
                 title,
                 morning,
@@ -27,11 +24,13 @@ export default function MedList() {
                 night,
                 as_needed,
             }
+
             await axios.post(
                 "http://localhost:3001/api/users/saveMed",
                 medicineData
-              );
-            } catch (err) {
+            );
+              
+        } catch (err) {
               console.error(err);
             }
 
@@ -41,7 +40,7 @@ export default function MedList() {
         setEvening(false);
         setNight(false);
         setAsNeeded(false);
-          };
+    };  
 
     const handleDeleteMed = async (event) => {
         event.preventDefault();
@@ -73,14 +72,6 @@ export default function MedList() {
         })
         .catch(error => console.log(error));
       }
-
-    const renderHeader = () => {
-        let headerElement = ['id', 'title', 'morning', 'afternoon', 'evening', 'night', 'as needed']
-
-        return headerElement.map((key, index) => {
-            return <th key={index}>{key.toUpperCase()}</th>
-        })
-    }
 
         const renderForm = () => {
             return (
@@ -138,14 +129,7 @@ export default function MedList() {
                 <div className="row">
                     <div className="col-md-12">
                         <h1 className="mt-4 mb-4">Your Medication List</h1>
-                        <table className="table table-striped">
-                            <thead>
-                                <tr>{renderHeader()}</tr>
-                            </thead>
-                            <tbody>
-                                <Medtable medlist={medlist} />
-                            </tbody>
-                        </table>
+                        <Medtable medlist={medlist} />
                     </div>
                 </div>
                 <div className="row">
