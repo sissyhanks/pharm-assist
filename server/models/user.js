@@ -56,6 +56,6 @@ UserSchema.methods.isCorrectPassword = async function (password) {
 //   return this.medList.length;
 // }); asfsaddf
 
-const User = model('User', UserSchema);
+const user = model('user', UserSchema);
 
-module.exports = User;
+module.exports = user;
