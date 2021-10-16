@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import About from "./components/About.js";
 import SampleHeader from './components/SampleHeader';
 import MedList from "./components/MedList.js";
+// import RenderForm from "./components/RenderForm.js"; 
+// import RenderHeader from "./components/RenderHeader.js"; 
 import Navbar from "./components/Navbar.js";
 import SignUp from "./components/SignUp.js";
 import AuthContext from "./context/AuthContext";
