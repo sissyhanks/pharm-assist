@@ -1,6 +1,7 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import Medtable from "./Medtable";
 
 
 export default function MedList() {
@@ -11,6 +12,8 @@ export default function MedList() {
     const [ evening, setEvening ] = useState(false);
     const [ night, setNight ] = useState(false);
     const [ as_needed, setAsNeeded] = useState(false);
+
+
 
     const handlenewMedSubmit = async (event) => {
         event.preventDefault();
@@ -50,14 +53,26 @@ export default function MedList() {
     };
 
     const [medications, setMedications] = React.useState([])
+    const [medlist, getMedList] = useState('');
 
-    React.useEffect(() => {
+    useEffect(() => {
         getData()
+        getUserData();
     }, [])
 
     const getData = async () => {
         setMedications()
     }
+    
+        const getUserData = () => {
+        axios.get("http://localhost:3001/api/users/getSingleUser")
+        .then((response) => {
+            const medlist = response.data.medList
+            console.log(medlist)
+            getMedList(medlist);
+        })
+        .catch(error => console.log(error));
+      }
 
     const renderHeader = () => {
         let headerElement = ['id', 'title', 'morning', 'afternoon', 'evening', 'night', 'as needed']
@@ -109,34 +124,24 @@ export default function MedList() {
             </div>
         )}
 
-    const renderBody = () => {
-        // return medications && medications.map(({ id, title, morning, afternoon, evening, night, as_needed }) => {
-        //     return (
-        //         <tr key={id}>
-        //             <td>{id}</td>
-        //             <td>{title}</td>
-        //             <td><input type="checkbox" id={`medication_${id}_morning`} checked={morning} aria-label={`Checkbox for ${title} in the morning`} /></td>
-        //             <td><input type="checkbox" id={`medication_${id}_afternoon`} checked={afternoon} aria-label={`Checkbox for ${title} in the afternoon`} /></td>
-        //             <td><input type="checkbox" id={`medication_${id}_evening`} checked={evening} aria-label={`Checkbox for ${title} in the evening`} /></td>
-        //             <td><input type="checkbox" id={`medication_${id}_night`} checked={night} aria-label={`Checkbox for ${title} in the night`} /></td>
-        //             <td><input type="checkbox" id={`medication_${id}_as_needed`} checked={as_needed} aria-label={`Checkbox for ${title} as needed`} /></td>
-        //         </tr>
-        //     )
-        // })
-    }
-
     return (
         <>
-        <div>{renderForm()}</div>
             <h1 id='title'>Your Medication List</h1>
+            
             <table className='table table-striped'>
                 <thead>
                     <tr>{renderHeader()}</tr>
+                    
                 </thead>
                 <tbody>
-                    {renderBody()}
+                
+                
+                    {/* {renderList()} */}
                 </tbody>
-            </table>
+                <tr>{renderForm()}</tr>
+            </table> 
+            <Medtable medlist={medlist}/>
         </>
-    );
+        
+    )
 }
