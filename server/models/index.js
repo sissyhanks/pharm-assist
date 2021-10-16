@@ -1,4 +1,4 @@
-const user = require('./user');
-const Medicine = require('./Medicine')
+const user = require('./adfasdfsa');
+const Medicine = require('./afafdaf')
 
 module.exports = { user, Medicine };
