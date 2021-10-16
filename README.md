@@ -2,7 +2,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <br><br>
 
-<img src="" alt="Image of Pharm-Assist homepage">
+<img src="./client/src/images/screenshot.png" alt="Image of Pharm-Assist homepage">
 <br><br>
 
 Pharm-Assist is deployed here:  https://
