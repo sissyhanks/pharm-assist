@@ -54,7 +54,7 @@ UserSchema.methods.isCorrectPassword = async function (password) {
 
 // medicineSchema.virtual('medCount').get(function () {
 //   return this.medList.length;
-// });
+// }); asfsaddf
 
 const User = model('User', UserSchema);
 
