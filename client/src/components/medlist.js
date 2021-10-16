@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Medtable from "./medtable1";
+import Medtable from "./medtable";
 
 
 export default function MedList() {
