@@ -1,7 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import getRxcuiInfo from './DrugInfo';
-import withListLoading from './withListLoading';
-import axios from 'axios';
+
 
 // start here-- app called from index.js
 // calls withListLoading and passes get RxcuiInfo
