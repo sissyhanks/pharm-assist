@@ -19,15 +19,15 @@ import "./styles/PrintingStyles.css"
 import "./styles/App.css"
 
 // Main App component
-class ComponentToPrint extends React.Component {
-    render() {
-      return (
-        <div>
-          <SampleHeader />
-        </div>
-      );
-  }
-}
+// class ComponentToPrint extends React.Component {
+//     render() {
+//       return (
+//         <div>
+//           <SampleHeader />
+//         </div>
+//       );
+//   }
+// }
 
 // This button needed to print
 class PButton extends React.Component {
