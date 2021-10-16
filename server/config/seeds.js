@@ -1,5 +1,5 @@
 const db = require('./connection');
-const { User, medlist } = require('../models');
+const { user, medlist } = require('../models');
 var faker = require('faker');
 var firstName = faker.name.firstName();
 var lastName = faker.name.lastName();
@@ -8,8 +8,8 @@ var randomUsername = faker.internet.userName();
 var randomPassword = faker.internet.password();
 
 db.once('open', async () => {
-    await User.deleteMany();
-    await User.create({
+    await user.deleteMany();
+    await user.create({
         firstName: firstName,
         lastName: lastName,
         username: randomUsername,
@@ -17,26 +17,26 @@ db.once('open', async () => {
         password: randomPassword,
         medlist: []
 });
-await User.create({
+await user.create({
     firstName: firstName,
     lastName: lastName,
-    username: randomUsername,
+    username: randomusername,
     email: randomEmail,
     password: randomPassword,
     medlist: []
 });
-await User.create({
+await user.create({
     firstName: firstName,
     lastName: lastName,
-    username: randomUsername,
+    username: randomusername,
     email: randomEmail,
     password: randomPassword,
     medlist: []
 });
-await User.create({
+await user.create({
     firstName: firstName,
     lastName: lastName,
-    username: randomUsername,
+    username: randomusername,
     email: randomEmail,
     password: randomPassword,
     medlist: []

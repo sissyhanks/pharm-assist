@@ -1,11 +1,11 @@
-const { User } = require('../models');
+const { user } = require('../models');
 const { Medicine } = require('../models');
 const { signToken } = require('../utils/auth');
 const jwt = require('jsonwebtoken');
 
 module.exports = {
   async getSingleUser({ user = null, params }, res) {
-    const foundUser = await User.findOne({
+    const foundUser = await user.findOne({
       $or: [{ _id: user ? user._id : params.id }, { username: params.username }],
     });
 
@@ -18,14 +18,14 @@ module.exports = {
 
 //register
   async register({ body }, res) {
-    const existingUser = await User.findOne({ email: body.email });
+    const existingUser = await user.findOne({ email: body.email });
     
     if (existingUser)
       return res.status(400).json({
         errorMessage: "There is an existing account associated with this email address."
       });
 
-    const newUser = await User.create(body);
+    const newUser = await user.create(body);
 
     if (!newUser) {
       return res.status(400).json({ message: 'Something is wrong!' });
@@ -43,7 +43,7 @@ module.exports = {
 
 //login
   async login({ body }, res) {
-    const user = await User.findOne({ email: body.email });
+    const user = await user.findOne({ email: body.email });
 
     if(!user) {
       return res.status(410).json({ errorMessage: "Incorrect username or password" });
@@ -92,7 +92,7 @@ module.exports = {
   async saveMed({ user, body }, res) {
     console.log(user);
     try {
-      const updatedUser = await User.findOneAndUpdate(
+      const updatedUser = await user.findOneAndUpdate(
         { _id: user._id },
         { $addToSet: { medList: body } },
         { new: true, runValidators: true }
@@ -105,7 +105,7 @@ module.exports = {
   },
   // remove a book from `savedBooks`
   async deleteMed({ user, params }, res) {
-    const updatedUser = await User.findOneAndUpdate(
+    const updatedUser = await user.findOneAndUpdate(
       { _id: user._id },
       { $pull: { medlist: { name: params.medicineName } } },
       { new: true }
