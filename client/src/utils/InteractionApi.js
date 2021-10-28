@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import getRxcuiInfo from './DrugInfo';
+import getRxcuiInfo from './drugInfo.js';
 import axios from 'axios';
 
 // start here-- app called from index.js
