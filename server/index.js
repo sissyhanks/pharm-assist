@@ -29,6 +29,7 @@ app.use(
     origin: [
       "http://localhost:3000",
       "http://localhost:3001",
+      "https://evening-taiga-39557.herokuapp.com/",
     ],
     credentials: true,
   })
