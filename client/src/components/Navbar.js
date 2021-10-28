@@ -5,6 +5,7 @@ import AuthContext from "../context/AuthContext.js";
 import { Link } from 'react-router-dom';
 
 import axios from "axios";
+import * as api from '../utils/api';
 
 export default function Navbar() {
 
@@ -26,7 +27,7 @@ const handleFormSubmit = async (event) => {
       };
 
       await axios.post(
-        "http://localhost:3001/api/users/login",
+        api.login,
         registerData,
         { withCredentials: true }
       );
@@ -39,7 +40,7 @@ const handleFormSubmit = async (event) => {
 
   const handleLogOut = async (event) => {
       await axios.get(
-      "http://localhost:3001/api/users/logout"
+      api.logout
     );
     await getLoggedIn();
     history.push("/");

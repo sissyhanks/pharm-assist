@@ -1,6 +1,6 @@
 import React from 'react';
 
-// called from withListLoading.js
+// called frm withListLoading.js
 const getRxcuiInfo = (props) => {
   const { drugs, interactions } = props;
   if (interactions.fullInteractionTypeGroup) return <p>An interaction exists between your medications.  Please contact a medical professional for more information.</p>;

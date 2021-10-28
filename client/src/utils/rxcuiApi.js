@@ -1,4 +1,4 @@
-// called from About.js line 47
+// called on About.js line 47
 const getRxcui = (query) => {
     // query contains MedOne
     console.log("Variable Check: " + query);

@@ -1,10 +1,10 @@
 {
   "name": "server",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "engines": {
     "node": "14.16.1"
   },
-  "description": "",
+  "description": "fun server",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

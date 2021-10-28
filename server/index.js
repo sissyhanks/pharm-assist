@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const dotenv = require('dotenv');
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const db = require('./config/connection');
@@ -7,6 +8,8 @@ const routes = require('./routes');
 const { ApolloServer } = require('apollo-server-express');
 const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleware } = require('./utils/auth');
+
+dotenv.config({ path: '.env'});
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -26,6 +29,7 @@ app.use(
     origin: [
       "http://localhost:3000",
       "http://localhost:3001",
+      "https://evening-taiga-39557.herokuapp.com/",
     ],
     credentials: true,
   })
@@ -36,8 +40,8 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
+db();
+
 app.use(routes);
 
-db.once('open', () => {
-  app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));
-});
+app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));

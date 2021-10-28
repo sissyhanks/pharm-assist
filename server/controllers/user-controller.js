@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 module.exports = {
   async getSingleUser({ user = null, params }, res) {
     const foundUser = await User.findOne({
-      $or: [{ _id: user ? user._id : params.id }, { username: params.username }],
+      $or: [{ _id: user ? user._id : user.id }, { username: user.email }],
     });
 
     if (!foundUser) {

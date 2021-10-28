@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
-import getRxcui from "../apifiles/RxcuiApi.js"
-import getInteraction from "../apifiles/InteractionApi.js";
+import getRxcui from "../utils/rxcuiApi.js";
+import getInteraction from "../utils/interactionApi.js";
 
 // Called from src/app.js
 export default function About() {

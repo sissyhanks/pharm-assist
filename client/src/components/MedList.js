@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Medtable from "./Medtable";
+import * as api from '../utils/api';
 
 
 export default function MedList() {
@@ -26,7 +27,7 @@ export default function MedList() {
             }
 
             await axios.post(
-                "http://localhost:3001/api/users/saveMed",
+                api.saveMed,
                 medicineData
             );
               
@@ -64,7 +65,7 @@ export default function MedList() {
     }
     
         const getUserData = () => {
-        axios.get("http://localhost:3001/api/users/getSingleUser")
+        api.getSingleUser()
         .then((response) => {
             const medlist = response.data.medList
             console.log(medlist)
