@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useHistory } from "react-router-dom";
 // import { createUser } from '../utils/API';
 import AuthContext from "../context/AuthContext.js";
+import * as api from '../utils/api';
 import axios from "axios";
 
 export default function SignUp() {
@@ -27,7 +28,7 @@ export default function SignUp() {
       };
 
       await axios.post(
-        "http://localhost:3001/api/users/register",
+        api.register,
         registerData,
         { withCredentials: true }
       );
