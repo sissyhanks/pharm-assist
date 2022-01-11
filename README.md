@@ -5,7 +5,7 @@
 <img src="./client/src/images/screenshot.png" alt="Image of Pharm-Assist homepage">
 <br><br>
 
-Pharm-Assist is deployed here:  https://
+[LIVE DEMO](https://evening-taiga-39557.herokuapp.com/)
 <br><br>
 
 ## Description
